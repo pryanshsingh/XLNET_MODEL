@@ -1,0 +1,23 @@
+%%html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sentiment Analysis</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Sentiment Analysis</h1>
+    <textarea id="text" rows="4" cols="50"></textarea><br>
+    <button onclick="predict()">Predict</button><br>
+    <p id="result"></p>
+
+    <script>
+        function predict() {
+            var text = $("#text").val();
+            $.post("http://localhost:8000/predict/", JSON.stringify({"text": text}), function(data) {
+                $("#result").text("Sentiment: " + data.sentiment);
+            }, "json");
+        }
+    </script>
+</body>
+</html>
